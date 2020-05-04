@@ -31,6 +31,7 @@
             this.buttonGetInfo = new System.Windows.Forms.Button();
             this.textBoxCity = new System.Windows.Forms.TextBox();
             this.textBoxServerInfo = new System.Windows.Forms.TextBox();
+            this.labelTemp = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // buttonGetInfo
@@ -61,11 +62,21 @@
             this.textBoxServerInfo.Size = new System.Drawing.Size(492, 323);
             this.textBoxServerInfo.TabIndex = 2;
             // 
+            // labelTemp
+            // 
+            this.labelTemp.AutoSize = true;
+            this.labelTemp.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelTemp.Location = new System.Drawing.Point(520, 15);
+            this.labelTemp.Name = "labelTemp";
+            this.labelTemp.Size = new System.Drawing.Size(0, 32);
+            this.labelTemp.TabIndex = 3;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(533, 450);
+            this.ClientSize = new System.Drawing.Size(770, 450);
+            this.Controls.Add(this.labelTemp);
             this.Controls.Add(this.textBoxServerInfo);
             this.Controls.Add(this.textBoxCity);
             this.Controls.Add(this.buttonGetInfo);
@@ -81,6 +92,7 @@
         private System.Windows.Forms.Button buttonGetInfo;
         private System.Windows.Forms.TextBox textBoxCity;
         private System.Windows.Forms.TextBox textBoxServerInfo;
+        private System.Windows.Forms.Label labelTemp;
     }
 }
 

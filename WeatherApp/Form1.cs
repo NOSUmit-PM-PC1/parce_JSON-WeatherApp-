@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Net;
 using System.IO;
+using Newtonsoft.Json;
 
 namespace WeatherApp
 {
@@ -31,8 +32,31 @@ namespace WeatherApp
                 textBoxServerInfo.Text = streamReader.ReadToEnd();
             }
 
+            WeatherInfo weatherInfo = JsonConvert.DeserializeObject<WeatherInfo>(textBoxServerInfo.Text);
 
-            
+            labelTemp.Text = weatherInfo.Main.Temp.ToString();
+
+            List<WeatherInfo> t = new List<WeatherInfo>();
+            t.Add(weatherInfo);
+            t.Add(weatherInfo);
+            t.Add(weatherInfo);
+
+
+            textBoxServerInfo.Text = JsonConvert.SerializeObject(t);
+
         }
+    }
+
+    class TemperatureInfo
+    {
+        public float Temp { get; set; }
+        public float Pressure { get; set; }
+    }
+
+
+    class WeatherInfo
+    {
+        public TemperatureInfo Main { get; set; }
+        public string Name { get; set; }
     }
 }
