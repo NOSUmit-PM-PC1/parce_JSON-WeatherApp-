@@ -20,7 +20,7 @@ namespace WeatherApp
 
         private void buttonGetInfo_Click(object sender, EventArgs e)
         {
-            string url = "http://api.openweathermap.org/data/2.5/weather?q=" + textBoxCity.Text + "&appid=4e48950e61aa189901c61ad99f57a27a";
+            string url = "http://api.openweathermap.org/data/2.5/weather?q=" + textBoxCity.Text + "&appid=4e48950e61aa189901c61ad99f57a27a&units=metric";
 
             HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
 
