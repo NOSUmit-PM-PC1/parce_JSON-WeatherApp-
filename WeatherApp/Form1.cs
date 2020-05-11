@@ -17,8 +17,16 @@ namespace WeatherApp
         public MainForm()
         {
             InitializeComponent();
+            listBoxCities.DataSource = weathers;
+            listBoxCities.DisplayMember = "Name";
+
+            dataGridViewCities.DataSource = weathers;
+            
         }
 
+        BindingList<WeatherInfoData> weathers = new BindingList<WeatherInfoData>();
+
+        
         private void buttonGetInfo_Click(object sender, EventArgs e)
         {
             string url = "http://api.openweathermap.org/data/2.5/weather?q=" + textBoxCity.Text + "&appid=4e48950e61aa189901c61ad99f57a27a&units=metric";
@@ -33,17 +41,23 @@ namespace WeatherApp
             }
 
             WeatherInfo weatherInfo = JsonConvert.DeserializeObject<WeatherInfo>(textBoxServerInfo.Text);
+            WeatherInfoData weatherInfoData = new WeatherInfoData(weatherInfo);
+            weathers.Add(weatherInfoData);
 
-            labelTemp.Text = weatherInfo.Main.Temp.ToString();
+           // labelTemp.Text = weatherInfo.Main.Temp.ToString();
+            
+        }
 
-            List<WeatherInfo> t = new List<WeatherInfo>();
-            t.Add(weatherInfo);
-            t.Add(weatherInfo);
-            t.Add(weatherInfo);
+        private void MainForm_Load(object sender, EventArgs e)
+        {
 
+        }
 
-            textBoxServerInfo.Text = JsonConvert.SerializeObject(t);
-
+        private void listBoxCities_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            WeatherInfoData weatherInfo = (WeatherInfoData)listBoxCities.SelectedItem;
+           // labelTemp.Text = weatherInfo.Main.Temp.ToString();
+           // textBoxServerInfo.Text = weatherInfo.Name + " " + weatherInfo.Main.Temp + " " + weatherInfo.Main.Pressure;
         }
     }
 
@@ -51,6 +65,11 @@ namespace WeatherApp
     {
         public float Temp { get; set; }
         public float Pressure { get; set; }
+
+        public override string ToString()
+        {
+            return Temp + " " + Pressure;
+        }
     }
 
 
@@ -59,4 +78,23 @@ namespace WeatherApp
         public TemperatureInfo Main { get; set; }
         public string Name { get; set; }
     }
+
+
+    class WeatherInfoData
+    {
+        private float Temp { get; set; }
+        public string Name { get; set; }
+        public float Pressure { get; set; }
+
+        public WeatherInfoData (WeatherInfo w)
+        {
+            Temp = w.Main.Temp;
+            Name = w.Name;
+            Pressure = w.Main.Pressure;
+        }
+
+    }
+
+
+
 }
